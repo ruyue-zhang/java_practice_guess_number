@@ -10,9 +10,6 @@ public class App {
     //得到答案
     Answer  a = new Answer();
     String answer = a.readAnswer();
-    if(a.isRightful(answer)) {
-      Data data = new Data();
-      System.out.println(data.judgeOutput("2478", answer));
-    }
+
   }
 }

@@ -13,16 +13,22 @@ import java.util.Set;
 public class Answer implements AnswerInterface {
     @Override
     public String readAnswer() {
-        File file = new File("C:\\ruyue\\java\\ThoughtWorks\\homework\\java_practice_guess_number\\src\\main\\resources\\answer.txt");
+        File file = new File("src\\main\\resources\\answer.txt");
         String answer = "";
-        try(Reader reader = new FileReader(file)) {
-            char[] data = new char[20];
-            int len;
-            while(-1 != (len = reader.read(data))) {
-                answer = new String(data, 0, len);
+        if(file.exists()) {
+            try(Reader reader = new FileReader(file)) {
+                char[] data = new char[20];
+                int len;
+                while(-1 != (len = reader.read(data))) {
+                    answer = new String(data, 0, len);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else if(isRightful(answer)) {
+            answer = creatAnswer();
+        } else {
+            answer = creatAnswer();
         }
         return answer;
     }
