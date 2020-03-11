@@ -16,9 +16,6 @@ public class Data {
     }
 
     public void addInputData(String inputString) {
-        if(!isRightInput(inputString)) {
-            addTipsInfo("wrong input");
-        }
         inputData.add(inputString);
     }
 
@@ -30,15 +27,12 @@ public class Data {
         tipsInfo.add(tipsString);
     }
 
-    private boolean isRightInput(String inputString) {
+    public boolean isRightInput(String inputString) {
         Answer a = new Answer();
         return a.isRightful(inputString);
     }
 
-    public boolean judgeOutput(String inputString, String answer) {
-        if(inputString.equals(answer)) {
-            return true;
-        }
+    public String judgeOutput(String inputString, String answer) {
         char[] c = inputString.toCharArray();
         char[] answerChar = answer.toCharArray();
         int correct = 0;
@@ -54,10 +48,15 @@ public class Data {
                 }
             }
         }
-        String tips = correct + "A" + wrongPosition + "B";
-        addTipsInfo(tips);
-        return false;
+        return correct + "A" + wrongPosition + "B";
     }
 
-
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < inputData.size(); i++) {
+            result += inputData.get(i) + " " +tipsInfo.get(i) + "\n";
+        }
+        return result;
+    }
 }
